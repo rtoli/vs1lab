@@ -121,7 +121,7 @@
  
          updateLocation: function() {
              // TODO Hier Inhalt der Funktion "update" ergänzen
-             
+            
             var failure = function(error){
                 alert(error);
             }
@@ -129,18 +129,32 @@
             var success = function(position){
                 var latitude = getLatitude(position);
                 var longitude = getLongitude(position);
-
-                var mapURL = getLocationMapSrc(latitude, longitude);
+                var tags = JSON.parse($("#result-img").attr("data-tags"))
+                var mapURL = getLocationMapSrc(latitude, longitude, tags);
     
                 $("#latitude").val(latitude);
                 $("#longitude").val(longitude);
                 $("#hidden-latitude").val(latitude);
                 $("#hidden-longitude").val(longitude);
-    
+                $("#result-img").attr("src", mapURL);
+                console.log("test");
+                console.log($("#longitude").val());
+                console.log($("#result-img").attr("data-tags"));
+                console.log($("#hidden-latitude").val());
+                console.log($("#hidden-latitude2").val());
+
+            
+            }
+            console.log("GEOTAGGING IS RUNNING");
+            if ($("#longitude").val() === "" && $("#latitude").val() === "") {
+                tryLocate(success, failure);
+
+            } else {
+                var tags = JSON.parse($("#result-img").attr("data-tags"))
+                var mapURL = getLocationMapSrc(tags[tags.length - 1].latitude, tags[tags.length - 1].longitude, tags, 10);
                 $("#result-img").attr("src", mapURL);
             }
-            
-             tryLocate(success, failure);
+             
          }
  
      }; // ... Ende öffentlicher Teil

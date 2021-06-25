@@ -1,6 +1,4 @@
-
-	<!-- TODO: HTML AUS AUFGABE2 HIERHER KOPIEREN UND DIE BEISPIEL-EINTRÄGE DER DISCOVERY-LISTE MIT DEN FOLGENDEN ZEILEN ERSETZEN -->
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 	<head>
@@ -30,20 +28,14 @@
 				<form id="tag-form" action="/tagging" method="post">
 					<fieldset>
 						<legend>Enter new GeoTag</legend>
-
 						<label for="latitude">latitude</label>
-						<input type="number" step="any" id="latitude" name="latitude" placeholder="21.2456321" required value=<%= lat %>>
-
+						<input type="number" step="any" id="latitude" name="latitude" placeholder="21.2456321" required>
 						<label for="longitude">longitude</label>
-						<input type="number" step="any" id="longitude" name="longitude" placeholder="23.5335327" required value=<%= long %>>
-
+						<input type="number" step="any" id="longitude" name="longitude" placeholder="23.5335327" required>
 						<label for="name">name</label>
-						<input type="text" id="name" name="name" placeholder="z.B Hochschule" maxlength="10" pattern="[a-zA-Z]+" required value=<%= n %>>
-					
+						<input type="text" id="name" name="name" placeholder="z.B Hochschule" maxlength="10" pattern="[a-zA-Z]+" required>
 						<label for="hashtag">hashtag</label>
-						<input type="text" id="hashtag" name="hashtag" placeholder="# + max. 10 letters" maxlength="11" pattern="#[a-zA-Z]+" required value=<%= hash %>>
-	
-
+						<input type="text" id="hashtag" name="hashtag" placeholder="# + max. 10 letters" maxlength="11" pattern="#[a-zA-Z]+" required>
 						<input type="submit" value="submit">
 					</fieldset>
 				</form>
@@ -60,8 +52,8 @@
 						<legend>Filter by Searchterm</legend>
 						<input type="text" id="term" name="term" placeholder="search term" required>
 						<input type="submit" id="term-apply" value="apply">
-						<input id="hidden-latitude" type="hidden" name="hidden-latitude" value=<%= lat %>>
-						<input id="hidden-longitude" type="hidden" name="hidden-longitude" value=<%= long %>>
+						<input id="hidden-latitude" type="hidden" name="hidden-latitude">
+                        <input id="hidden-longitude" type="hidden" name="hidden-longitude">
 					</fieldset>
 				</form>
 					
@@ -70,22 +62,18 @@
 
 				<div class="taglist">
 					<ul id="results">
-						<% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
-							<li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
-						<% }); %>
+						<li>Castle (49.01379, 8.404435) #sight</li>
+						<li>IWI (49.01379, 8.390071) #edu</li>
 					</ul>
 				</div>
 
 				<div class="tagmap">
-					<% if (taglist !== undefined) { %>
-						<img id="result-img" src="./images/mapview.jpg" alt="a map with locations" data-tags="<%= JSON.stringify(taglist) %>"/>
-					<% } else { %>
-						<img id="result-img" src="./images/mapview.jpg" alt="a map with locations"/>
-					<% } %>
+					<img id="result-img" src="./images/mapview.jpg" alt="a map with locations"/>
 					<div class="caption">Result map</div>
 				</div>
 
 			</section>
+
 		</main>
 
 		<footer>

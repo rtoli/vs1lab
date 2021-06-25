@@ -70,8 +70,6 @@ const geomod = require('./geomodule/geomod');
  */
 
 app.get('/', function(req, res) {
-    console.log("/ " + req.body.latitude);
-    console.log(req.body["hidden-latitude"]);
     res.render('gta', {
         taglist: geomod.geoTagArray,
         lat:req.body.latitude,
@@ -79,7 +77,6 @@ app.get('/', function(req, res) {
         n:req.body.name,
         hash:req.body.hashtag
     });
-    console.log(geomod.hiddenLatitude);
 });
 
 /**
@@ -100,7 +97,6 @@ app.get('/', function(req, res) {
 app.post('/tagging',(req, res) => {
     var geo = new GeoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag);
     geomod.addTag(geo);
-    console.log("post " + req.body.latitude)
     res.render("gta", {
         lat: geo.latitude,
         long: geo.longitude,
@@ -126,15 +122,9 @@ app.post('/tagging',(req, res) => {
 
 app.post('/discovery', function (req, res) {
 
-    console.log(req.body.term.toString())
     var searchTerm = req.body.term.toString();
     var resultList = geomod.searchFromTerm(searchTerm);
-    console.log(resultList.length);
-    console.log(req.body["hidden-latitude"]);
-    console.log(req.body["hidden-longitude"]);
-    console.log(req.body.latitude);
 
-    
     if (resultList.length > 0) {
         res.render("gta", {
             lat: resultList[0].latitude,
